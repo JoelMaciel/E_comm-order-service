@@ -17,7 +17,7 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
     @Override
     public Order execute(CreateOrderCommand createOrderCommand) {
-        mapper.toDomainFromCommand(createOrderCommand);
-        return null;
+        Order order = mapper.toDomainFromCommand(createOrderCommand);
+        return orderRepository.save(order);
     }
 }
