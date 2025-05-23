@@ -28,4 +28,8 @@ public class OrderItemsEntity {
     private String skuCode;
     private BigDecimal price;
     private Integer quantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
 }
