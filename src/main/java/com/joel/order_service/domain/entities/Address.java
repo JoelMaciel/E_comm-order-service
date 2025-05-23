@@ -8,7 +8,7 @@ public class Address {
     private String district;
     private String city;
     private String state;
-    private String postalCode;
+    private String zipCode;
     private String country;
     private String referencePoint;
 }
