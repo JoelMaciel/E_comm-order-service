@@ -13,7 +13,9 @@ import java.util.UUID;
 public class OrderItems {
 
     private UUID id;
+    private String name;
     private String skuCode;
     private BigDecimal price;
     private Integer quantity;
+    private BigDecimal weight;
 }

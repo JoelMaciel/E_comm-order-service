@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 @Builder
 public record CreateOrderItemsCommand(
         String skuCode,
+        String name,
         BigDecimal price,
-        Integer quantity
+        Integer quantity,
+        BigDecimal weight
 ) {
 }
