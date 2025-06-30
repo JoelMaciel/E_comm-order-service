@@ -15,6 +15,8 @@ spring:
     show-sql: true
     properties:
       hibernate:
+        format_sql: true
+        use-new-id-generator-mappings: false
         dialect: org.hibernate.dialect.MySQL8Dialect
   flyway:
     locations: classpath:db/migration,classpath:db/testdb
