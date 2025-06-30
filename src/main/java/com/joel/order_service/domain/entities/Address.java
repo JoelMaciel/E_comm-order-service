@@ -1,5 +1,12 @@
 package com.joel.order_service.domain.entities;
 
+import lombok.*;
+
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     private String street;

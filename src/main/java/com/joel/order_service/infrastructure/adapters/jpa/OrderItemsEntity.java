@@ -25,9 +25,11 @@ public class OrderItemsEntity {
     @EqualsAndHashCode.Include
     private UUID id;
 
+    private String name;
     private String skuCode;
     private BigDecimal price;
     private Integer quantity;
+    private BigDecimal weight;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
