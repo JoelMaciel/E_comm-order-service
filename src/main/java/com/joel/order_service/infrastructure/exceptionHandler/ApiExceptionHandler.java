@@ -4,6 +4,8 @@ package com.joel.order_service.infrastructure.exceptionHandler;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
+import com.joel.order_service.domain.exceptions.BusinessException;
+import com.joel.order_service.domain.exceptions.ProductOutOfStockException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +38,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String MSG_GENERIC_ERROR_END_USER = "An unexpected internal system error has occurred. " +
             "Try again and if the problem persists, contact your system administrator.";
-    public static final String ENTITY_IN_USE = "Entity cannot be deleted because it is in use";
-    public static final String INVALID_USERNAME_OR_PASSWORD = "Invalid username or password";
+    public static final String INVALID_DATA = "Invalid data";
 
     private final MessageSource messageSource;
 
@@ -65,11 +66,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<?> handleDataIntegrityViolation(DataIntegrityViolationException ex, WebRequest webRequest) {
-        HttpStatus status = HttpStatus.CONFLICT;
-        ProblemType problemType = ProblemType.ENTITY_IN_USE;
-        String detail = ENTITY_IN_USE;
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<?> handleDataIntegrityViolation(BusinessException ex, WebRequest webRequest) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ProblemType problemType = ProblemType.INVALID_DATA;
+        String detail = INVALID_DATA;
 
         Problem problem = createProblemBuilder(status, problemType, detail)
                 .userMessage(detail)
@@ -77,6 +78,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, webRequest);
     }
+
+    @ExceptionHandler(ProductOutOfStockException.class)
+    public ResponseEntity<?> handleProductOutOfStock(ProductOutOfStockException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ProblemType problemType = ProblemType.BUSINESS_ERROR;
+        String detail = ex.getMessage();
+
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .userMessage(detail)
+                .build();
+
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> handleDataIntegrityViolation(ConstraintViolationException ex, WebRequest webRequest) {

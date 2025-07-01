@@ -1,4 +1,4 @@
-package com.joel.order_service.infrastructure.adapters.jpa;
+package com.joel.order_service.infrastructure.adapters.out.jpa;
 
 import com.joel.order_service.application.mapper.OrderMapper;
 import com.joel.order_service.domain.entities.Order;

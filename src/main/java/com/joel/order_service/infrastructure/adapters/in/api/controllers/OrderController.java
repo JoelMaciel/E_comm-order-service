@@ -1,4 +1,4 @@
-package com.joel.order_service.infrastructure.adapters.api.controllers;
+package com.joel.order_service.infrastructure.adapters.in.api.controllers;
 
 import com.joel.order_service.application.commands.CreateOrderCommand;
 import com.joel.order_service.application.dtos.request.OrderRequest;
