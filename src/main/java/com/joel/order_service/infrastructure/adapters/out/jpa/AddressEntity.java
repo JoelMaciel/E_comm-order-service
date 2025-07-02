@@ -1,4 +1,4 @@
-package com.joel.order_service.infrastructure.adapters.jpa;
+package com.joel.order_service.infrastructure.adapters.out.jpa;
 
 
 import jakarta.persistence.Column;

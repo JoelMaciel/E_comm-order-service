@@ -6,6 +6,7 @@ import com.joel.order_service.application.commands.OrderCalculationContext;
 import com.joel.order_service.application.mapper.OrderMapper;
 import com.joel.order_service.application.ports.usecase.orders.CreateOrderUseCase;
 import com.joel.order_service.application.ports.usecase.orders.FreightCalculator;
+import com.joel.order_service.application.validator.OrderValidator;
 import com.joel.order_service.domain.entities.Order;
 import com.joel.order_service.domain.enums.DiscountType;
 import com.joel.order_service.domain.repositories.OrderRepository;
@@ -22,6 +23,7 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     private final OrderRepository orderRepository;
     private final OrderMapper mapper;
     private final FreightCalculator freightCalculator;
+    private final OrderValidator orderValidator;
 
     @Override
     public Order execute(CreateOrderCommand createOrderCommand) {
@@ -50,6 +52,9 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         BigDecimal total = subtotal.add(freightRate).subtract(totalDiscount);
 
         Order order = mapper.toDomainFromCommand(createOrderCommand, subtotal, freightRate, totalDiscount, total);
+
+        orderValidator.validate(order);
+
         return orderRepository.save(order);
     }
 

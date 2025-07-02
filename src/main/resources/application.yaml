@@ -23,6 +23,11 @@ spring:
     enabled: true
     baseline-on-migrate: true
 
+app:
+  stock-service:
+    url: http://localhost:8089/ecomm-stock/api/stock
+
+
 
 logging:
   level:

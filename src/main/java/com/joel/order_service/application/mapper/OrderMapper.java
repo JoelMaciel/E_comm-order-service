@@ -11,15 +11,14 @@ import com.joel.order_service.domain.entities.Address;
 import com.joel.order_service.domain.entities.Order;
 import com.joel.order_service.domain.entities.OrderItems;
 import com.joel.order_service.domain.enums.OrderStatus;
-import com.joel.order_service.infrastructure.adapters.jpa.AddressEntity;
-import com.joel.order_service.infrastructure.adapters.jpa.OrderEntity;
-import com.joel.order_service.infrastructure.adapters.jpa.OrderItemsEntity;
+import com.joel.order_service.infrastructure.adapters.out.jpa.AddressEntity;
+import com.joel.order_service.infrastructure.adapters.out.jpa.OrderEntity;
+import com.joel.order_service.infrastructure.adapters.out.jpa.OrderItemsEntity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
